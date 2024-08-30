@@ -63,6 +63,65 @@ void toHex(int n) {
     printf("\n");
 }
 
+int arrayToInt(int arr[], int size) {
+    int number = 0;
+
+    // Loop para construir o número
+    for (int i = 0; i < size; i++) {
+        // Multiplica cada dígito pelo valor de sua posição
+        number = number * 10 + arr[i];
+    }
+
+    return number;
+}
+
+void toBCD(int num) {
+    printf("Passos para converter %d em BCD:\n", num);
+    
+    int digits[10]; // Máximo de 10 dígitos para um inteiro
+    int count = 0;
+
+    // Extrai cada dígito do número
+    while (num > 0) {
+        digits[count] = num % 10;
+        num /= 10;
+        count++;
+    }
+
+    int showSplitedCount = 1;
+    printf("Separando os digitos\n");
+    for (int j = count - 1; j >= 0; j--) {
+        printf("Digito %d: %d\n", showSplitedCount, digits[j]);
+        showSplitedCount++;
+    }
+
+    // Imprime os dígitos em BCD
+    printf("Convertendo cada digito em binario\n");
+    printf("Resultado em BCD: ");
+    for (int i = count - 1; i >= 0; i--) {
+        int n = digits[i];
+
+        int binary[32];
+        int i = 0;
+
+        while (n > 0) {
+            binary[i] = n % 2;
+            n = n / 2;
+            i++;
+        }
+
+        int arrayDigitsIntegerNum = 0;
+        for (int j = i - 1; j >= 0; j--) {
+            arrayDigitsIntegerNum = arrayDigitsIntegerNum * 10 + binary[j];
+        }
+
+        printf("%04d", arrayDigitsIntegerNum);
+
+        printf(" ");
+    }
+    printf("\n");
+}
+
 int main() {
     int num;
     printf("Insira um numero: ");
@@ -76,6 +135,9 @@ int main() {
     printf("\n");
 
     toHex(num);
+    printf("\n");
+
+    toBCD(num);
     printf("\n");
 
     return 0;
