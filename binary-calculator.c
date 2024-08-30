@@ -24,6 +24,23 @@ void toBinary(int n) {
     printf("\n");
 }
 
+void toOctal(int n) {
+    printf("Base 10 para Base 8:\n");
+    int octal[32];
+    int i = 0;
+    while (n > 0) {
+        octal[i] = n % 8;
+        printf("Passo %d: %d %% 8 = %d (resto)\n", i+1, n, octal[i]);
+        n = n / 8;
+        printf("Novo valor de n = %d\n", n);
+        i++;
+    }
+    printf("Resultado em base 8: ");
+    for (int j = i - 1; j >= 0; j--)
+        printf("%d", octal[j]);
+    printf("\n");
+}
+
 int main() {
     int num;
     printf("Insira um numero: ");
@@ -31,6 +48,9 @@ int main() {
     printf("Numero: %d\n", num);
 
     toBinary(num);
+    printf("\n");
+
+    toOctal(num);
     printf("\n");
 
     return 0;
