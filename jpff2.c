@@ -148,6 +148,27 @@ void floatToBinary(float f) {
     }
 }
 
+void doubleToBinary(double d) {
+    uint64_t bits;
+    memcpy(&bits, &d, sizeof(bits));
+
+    uint64_t sinal = (bits >> 63) & 1;
+    uint64_t expoente = (bits >> 52) & 0x7FF;
+    uint64_t fracao = bits & 0xFFFFFFFFFFFFF;
+
+    printf("\nDouble: %lf\n", d);
+    printf("Bits: ");
+    for (int i = 64 - 1; i >= 0; i--) {
+        printf("%d", (bits >> i) & 1);
+    }
+    printf("\nSinal: %llu\n", sinal);
+    printf("Expoente com vies: %llu\n", expoente);
+    printf("Fracao: ");
+    for (int i = 52 - 1; i >= 0; i--) {
+        printf("%d", (fracao >> i) & 1);
+    }
+}
+
 int main() {
     int num;
     printf("Insira um numero: ");
@@ -174,6 +195,9 @@ int main() {
     scanf("%f", &realNum);
 
     floatToBinary(realNum);
+    printf("\n");
+
+    doubleToBinary((double) realNum);
     printf("\n");
 
     return 0;
