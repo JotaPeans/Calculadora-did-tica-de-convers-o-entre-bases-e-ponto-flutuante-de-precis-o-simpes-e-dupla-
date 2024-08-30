@@ -122,6 +122,21 @@ void toBCD(int num) {
     printf("\n");
 }
 
+void toComplement2(int num) {
+    int bits = 16;
+    printf("Passos para converter %d para complemento a 2 (%d bits):\n", num, bits);
+
+    if (num < 0) {
+        num = (1 << bits) + num; // Soma o número negativo ao valor máximo para obter o complemento
+    }
+
+    printf("Resultado em complemento a 2: ");
+    for (int i = bits - 1; i >= 0; i--) {
+        printf("%d", (num >> i) & 1); // Imprime cada bit
+    }
+    printf("\n");
+}
+
 int main() {
     int num;
     printf("Insira um numero: ");
@@ -138,6 +153,9 @@ int main() {
     printf("\n");
 
     toBCD(num);
+    printf("\n");
+
+    toComplement2(num * -1);
     printf("\n");
 
     return 0;
