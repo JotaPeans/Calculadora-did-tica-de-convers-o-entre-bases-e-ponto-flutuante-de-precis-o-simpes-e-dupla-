@@ -41,6 +41,28 @@ void toOctal(int n) {
     printf("\n");
 }
 
+void toHex(int n) {
+    printf("Base 10 para Base 16:\n");
+    char hex[32];
+    int i = 0;
+    while (n > 0) {
+        int temp = n % 16;
+        printf("Passo %d: %d %% 16 = %d (resto)\n", i+1, n, temp);
+        if (temp < 10) {
+            hex[i] = temp + 48;
+        } else {
+            hex[i] = temp + 55;
+        }
+        n = n / 16;
+        printf("Novo valor de n = %d\n", n);
+        i++;
+    }
+    printf("Resultado em base 16: ");
+    for (int j = i - 1; j >= 0; j--)
+        printf("%c", hex[j]);
+    printf("\n");
+}
+
 int main() {
     int num;
     printf("Insira um numero: ");
@@ -51,6 +73,9 @@ int main() {
     printf("\n");
 
     toOctal(num);
+    printf("\n");
+
+    toHex(num);
     printf("\n");
 
     return 0;
