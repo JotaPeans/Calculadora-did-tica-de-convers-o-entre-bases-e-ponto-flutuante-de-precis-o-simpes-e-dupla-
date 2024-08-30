@@ -6,6 +6,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
 
 void toBinary(int n) {
     printf("Base 10 para Base 2:\n");
@@ -61,18 +63,6 @@ void toHex(int n) {
     for (int j = i - 1; j >= 0; j--)
         printf("%c", hex[j]);
     printf("\n");
-}
-
-int arrayToInt(int arr[], int size) {
-    int number = 0;
-
-    // Loop para construir o número
-    for (int i = 0; i < size; i++) {
-        // Multiplica cada dígito pelo valor de sua posição
-        number = number * 10 + arr[i];
-    }
-
-    return number;
 }
 
 void toBCD(int num) {
@@ -137,6 +127,27 @@ void toComplement2(int num) {
     printf("\n");
 }
 
+void floatToBinary(float f) {
+    uint32_t bits;
+    memcpy(&bits, &f, sizeof(bits));
+
+    uint32_t sinal = (bits >> 31) & 1;
+    uint32_t expoente = (bits >> 23) & 0xFF;
+    uint32_t fracao = bits & 0x7FFFFF;
+
+    printf("Float: %f\n", f);
+    printf("Bits: ");
+    for (int i = 32 - 1; i >= 0; i--) {
+        printf("%d", (bits >> i) & 1);
+    }
+    printf("\nSinal: %u\n", sinal);
+    printf("Expoente com vies: %u\n", expoente);
+    printf("Fracao: ");
+    for (int i = 23 - 1; i >= 0; i--) {
+        printf("%d", (fracao >> i) & 1);
+    }
+}
+
 int main() {
     int num;
     printf("Insira um numero: ");
@@ -156,6 +167,13 @@ int main() {
     printf("\n");
 
     toComplement2(num * -1);
+    printf("\n");
+
+    float realNum;
+    printf("Insira um numero real: ");
+    scanf("%f", &realNum);
+
+    floatToBinary(realNum);
     printf("\n");
 
     return 0;
